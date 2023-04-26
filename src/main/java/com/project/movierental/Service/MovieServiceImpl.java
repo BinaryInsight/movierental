@@ -14,26 +14,22 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    // find all movies list
     public List<MovieResource> getAllMovies() {
         List<MovieResource> movieList = movieRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
         return movieList;
     }
 
-    // find a movie by it's id
     public MovieResource getMoviesById(Long id) {
         Movie movie = movieRepository.findById(id).orElseGet(null);
         return convertToDTO(movie);
     }
 
-    // create a movie
     public MovieResource createMovie(MovieResource movieResource) {
         Movie movie = convertToEntity(movieResource);
         movieRepository.save(movie);
         return convertToDTO(movie);
     }
 
-    // update a movie by it's id
     public MovieResource updateMovie(MovieResource movieResource) {
         Movie movie = movieRepository.findById(movieResource.getId()).orElseGet(null);
         movie.setTitle(movieResource.getTitle());
@@ -43,7 +39,6 @@ public class MovieServiceImpl implements MovieService {
         return convertToDTO(movie);
     }
 
-    // delete a movie by it's id
     public String deleteMovie(Long id) {
         movieRepository.deleteById(id);
         return "Movie deleted" +id;
