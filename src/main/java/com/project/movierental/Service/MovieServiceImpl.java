@@ -51,7 +51,6 @@ public class MovieServiceImpl implements MovieService {
 
     private MovieResource convertToDTO(Movie movie) {
         MovieResource movieResource = new MovieResource();
-        movieResource.setId(movie.getId());
         movieResource.setTitle(movie.getTitle());
         movieResource.setType(movie.getType());
         movieResource.setMovieRental(movie.getMovieRental());

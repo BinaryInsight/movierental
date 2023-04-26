@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * @author Parasuram
  */
 
-@Entity // added annotations
+@Entity
 @Table(name = "movie")
 @AllArgsConstructor
 @NoArgsConstructor
