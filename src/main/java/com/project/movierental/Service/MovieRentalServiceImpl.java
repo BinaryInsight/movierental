@@ -50,7 +50,6 @@ public class MovieRentalServiceImpl implements MovieRentalService {
 
     private MovieRentalResource convertToDTO(MovieRental movieRental) {
         MovieRentalResource movieRentalResource = new MovieRentalResource();
-        movieRentalResource.setId(movieRental.getId());
         movieRentalResource.setDaysRented(movieRental.getDaysRented());
 //        movieRentalResource.setMovie(movieRental.getMovie());
         return movieRentalResource;
@@ -58,7 +57,6 @@ public class MovieRentalServiceImpl implements MovieRentalService {
 
     private MovieRental convertToEntity(MovieRentalResource movieRentalResource) {
         MovieRental movieRental = new MovieRental();
-        movieRental.setId(movieRentalResource.getId());
         movieRental.setDaysRented(movieRentalResource.getDaysRented());
         return movieRental;
     }
