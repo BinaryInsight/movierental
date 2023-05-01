@@ -6,6 +6,7 @@ import com.project.movierental.Resource.MovieRentalResource;
 import com.project.movierental.Resource.MovieResource;
 import com.project.movierental.Service.MovieRentalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,29 +19,28 @@ public class MovieRentalController {
     private MovieRentalService movieRentalService;
 
     @GetMapping("/allMovieRentals")
-    public List<MovieRentalResource> getAllMovieRentals() {
-        return movieRentalService.getAllMovieRentals();
+    public ResponseEntity<List<MovieRentalResource>> getAllMovieRentals() {
+        return ResponseEntity.ok(movieRentalService.getAllMovieRentals());
     }
 
     @GetMapping("/{id}")
-    public MovieRentalResource getMovieRentalById(@PathVariable("id") Long id) {
-        return movieRentalService.getMovieRentalById(id);
+    public ResponseEntity<MovieRentalResource> getMovieRentalById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(movieRentalService.getMovieRentalById(id));
     }
 
     @PostMapping(consumes = "application/json")
-    public MovieRentalResource createMovieRental(@RequestBody MovieRentalResource movieRentalResource) {
-        return movieRentalService.createMovieRental(movieRentalResource);
+    public ResponseEntity<MovieRentalResource> createMovieRental(@RequestBody MovieRentalResource movieRentalResource) {
+        return ResponseEntity.ok(movieRentalService.createMovieRental(movieRentalResource));
     }
 
     @PutMapping("/update/{id}")
-    public MovieRentalResource updateMovieRentalById(@PathVariable("id") Long id, @RequestBody MovieRentalResource movieRentalResource) {
-        return movieRentalService.updateMovieRentalById(movieRentalResource);
+    public ResponseEntity<MovieRentalResource> updateMovieRentalById(@PathVariable("id") Long id, @RequestBody MovieRentalResource movieRentalResource) {
+        return ResponseEntity.ok(movieRentalService.updateMovieRentalById(movieRentalResource));
     }
 
     @DeleteMapping("delete/{id}")
-    public String deleteMovieRental(@PathVariable("id") Long id) {
-        movieRentalService.deleteMovieRental(id);
-        return "MovieRental deleted " +id;
+    public ResponseEntity<String> deleteMovieRental(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(movieRentalService.deleteMovieRental(id));
     }
 
 }

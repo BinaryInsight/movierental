@@ -1,5 +1,6 @@
 package com.project.movierental.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ public class Movie {
     @Column(name = "type")
     private Type type;
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
 //    @MapsId
     @JoinColumn(name = "movie_rentals_id", referencedColumnName = "id")  // renamed from "id" to "movie_rentals_id"
     private MovieRental movieRental;

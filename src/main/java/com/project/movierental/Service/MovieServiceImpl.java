@@ -3,6 +3,7 @@ package com.project.movierental.Service;
 import com.project.movierental.Entity.Movie;
 import com.project.movierental.Repository.MovieRepository;
 import com.project.movierental.Resource.MovieResource;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -32,10 +33,7 @@ public class MovieServiceImpl implements MovieService {
 
     public MovieResource updateMovie(MovieResource movieResource) {
         Movie movie = movieRepository.findById(movieResource.getId()).orElseGet(null);
-        movie.setId(movieResource.getId());
-        movie.setTitle(movieResource.getTitle());
-        movie.setType(movieResource.getType());
-        movie.setMovieRental(movieResource.getMovieRental());
+        BeanUtils.copyProperties(movieResource,movie);
         movieRepository.save(movie);
         return convertToDTO(movie);
     }
@@ -47,19 +45,13 @@ public class MovieServiceImpl implements MovieService {
 
     private MovieResource convertToDTO(Movie movie) {
         MovieResource movieResource = new MovieResource();
-        movieResource.setId(movie.getId());
-        movieResource.setTitle(movie.getTitle());
-        movieResource.setType(movie.getType());
-        movieResource.setMovieRental(movie.getMovieRental());
+        BeanUtils.copyProperties(movie,movieResource);
         return movieResource;
     }
 
     private Movie convertToEntity(MovieResource movieResource) {
         Movie movie = new Movie();
-        movie.setId(movieResource.getId());
-        movie.setTitle(movieResource.getTitle());
-        movie.setType(movieResource.getType());
-        movie.setMovieRental(movieResource.getMovieRental());
+        BeanUtils.copyProperties(movieResource,movie);
         return movie;
     }
 

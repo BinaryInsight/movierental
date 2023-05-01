@@ -5,6 +5,7 @@ import com.project.movierental.Entity.MovieRental;
 import com.project.movierental.Repository.MovieRentalRepository;
 import com.project.movierental.Resource.MovieRentalResource;
 import com.project.movierental.Resource.MovieResource;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +37,7 @@ public class MovieRentalServiceImpl implements MovieRentalService {
 
     public MovieRentalResource updateMovieRentalById(MovieRentalResource movieRentalResource) {
         MovieRental movieRental = movieRentalRepository.findById(movieRentalResource.getId()).orElseGet(null);
-        movieRental.setId(movieRentalResource.getId());
-        movieRental.setDaysRented(movieRentalResource.getDaysRented());
-        movieRental.setMovie(movieRentalResource.getMovie());
+        BeanUtils.copyProperties(movieRentalResource,movieRental);
         movieRentalRepository.save(movieRental);
         return convertToDTO(movieRental);
     }
@@ -51,17 +50,13 @@ public class MovieRentalServiceImpl implements MovieRentalService {
 
     private MovieRentalResource convertToDTO(MovieRental movieRental) {
         MovieRentalResource movieRentalResource = new MovieRentalResource();
-        movieRentalResource.setId(movieRental.getId());
-        movieRentalResource.setDaysRented(movieRental.getDaysRented());
-        movieRentalResource.setMovie(movieRental.getMovie());
+        BeanUtils.copyProperties(movieRental,movieRentalResource);
         return movieRentalResource;
     }
 
     private MovieRental convertToEntity(MovieRentalResource movieRentalResource) {
         MovieRental movieRental = new MovieRental();
-        movieRental.setId(movieRentalResource.getId());
-        movieRental.setDaysRented(movieRentalResource.getDaysRented());
-        movieRental.setMovie(movieRentalResource.getMovie());
+        BeanUtils.copyProperties(movieRentalResource,movieRental);
         return movieRental;
     }
 }

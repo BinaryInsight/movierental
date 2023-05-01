@@ -4,6 +4,7 @@ import com.project.movierental.Entity.Movie;
 import com.project.movierental.Resource.MovieResource;
 import com.project.movierental.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -15,29 +16,28 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping("/all")
-    public List<MovieResource> getAllMovies() {
-        return movieService.getAllMovies();
+    public ResponseEntity<List<MovieResource>> getAllMovies() {
+        return ResponseEntity.ok(movieService.getAllMovies());
     }
 
     @GetMapping("/{id}")
-    public MovieResource getMovieById(@PathVariable("id") Long id) {
-        return movieService.getMoviesById(id);
+    public ResponseEntity<MovieResource> getMovieById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(movieService.getMoviesById(id));
     }
 
     @PostMapping(consumes = "application/json")
-    public MovieResource createMovie(@RequestBody MovieResource movieResource) {
-        return movieService.createMovie(movieResource);
+    public ResponseEntity<MovieResource> createMovie(@RequestBody MovieResource movieResource) {
+        return ResponseEntity.ok(movieService.createMovie(movieResource));
     }
 
     @PutMapping("/update/{id}")
-    public MovieResource updateMovie(@PathVariable("id") Long id, @RequestBody MovieResource movieResource) {
-        return movieService.updateMovie(movieResource);
+    public ResponseEntity<MovieResource> updateMovie(@PathVariable("id") Long id, @RequestBody MovieResource movieResource) {
+        return ResponseEntity.ok(movieService.updateMovie(movieResource));
     }
 
     @DeleteMapping("delete/{id}")
-    public String deleteMovie(@PathVariable("id") Long id) {
-         movieService.deleteMovie(id);
-         return "Movie deleted " +id;
+    public ResponseEntity<String> deleteMovie(@PathVariable("id") Long id) {
+         return ResponseEntity.ok(movieService.deleteMovie(id));
     }
 
 }

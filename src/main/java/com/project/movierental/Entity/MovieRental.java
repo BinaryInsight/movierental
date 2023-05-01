@@ -1,5 +1,6 @@
 package com.project.movierental.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class MovieRental {
     private int daysRented;
 
     @OneToOne(mappedBy = "movieRental", cascade = CascadeType.ALL)
+    @JsonIgnore
 //    @PrimaryKeyJoinColumn // (name = "movie_id", referencedColumnName = "id")
     private Movie movie;
 
