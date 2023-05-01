@@ -36,8 +36,9 @@ public class MovieRentalServiceImpl implements MovieRentalService {
 
     public MovieRentalResource updateMovieRentalById(MovieRentalResource movieRentalResource) {
         MovieRental movieRental = movieRentalRepository.findById(movieRentalResource.getId()).orElseGet(null);
+        movieRental.setId(movieRentalResource.getId());
         movieRental.setDaysRented(movieRentalResource.getDaysRented());
-//        movieRental.setMovie(movieRentalResource.getMovie());
+        movieRental.setMovie(movieRentalResource.getMovie());
         movieRentalRepository.save(movieRental);
         return convertToDTO(movieRental);
     }
@@ -50,14 +51,17 @@ public class MovieRentalServiceImpl implements MovieRentalService {
 
     private MovieRentalResource convertToDTO(MovieRental movieRental) {
         MovieRentalResource movieRentalResource = new MovieRentalResource();
+        movieRentalResource.setId(movieRental.getId());
         movieRentalResource.setDaysRented(movieRental.getDaysRented());
-//        movieRentalResource.setMovie(movieRental.getMovie());
+        movieRentalResource.setMovie(movieRental.getMovie());
         return movieRentalResource;
     }
 
     private MovieRental convertToEntity(MovieRentalResource movieRentalResource) {
         MovieRental movieRental = new MovieRental();
+        movieRental.setId(movieRentalResource.getId());
         movieRental.setDaysRented(movieRentalResource.getDaysRented());
+        movieRental.setMovie(movieRentalResource.getMovie());
         return movieRental;
     }
 }

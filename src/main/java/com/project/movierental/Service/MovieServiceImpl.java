@@ -32,6 +32,7 @@ public class MovieServiceImpl implements MovieService {
 
     public MovieResource updateMovie(MovieResource movieResource) {
         Movie movie = movieRepository.findById(movieResource.getId()).orElseGet(null);
+        movie.setId(movieResource.getId());
         movie.setTitle(movieResource.getTitle());
         movie.setType(movieResource.getType());
         movie.setMovieRental(movieResource.getMovieRental());
@@ -46,6 +47,7 @@ public class MovieServiceImpl implements MovieService {
 
     private MovieResource convertToDTO(Movie movie) {
         MovieResource movieResource = new MovieResource();
+        movieResource.setId(movie.getId());
         movieResource.setTitle(movie.getTitle());
         movieResource.setType(movie.getType());
         movieResource.setMovieRental(movie.getMovieRental());
@@ -54,6 +56,7 @@ public class MovieServiceImpl implements MovieService {
 
     private Movie convertToEntity(MovieResource movieResource) {
         Movie movie = new Movie();
+        movie.setId(movieResource.getId());
         movie.setTitle(movieResource.getTitle());
         movie.setType(movieResource.getType());
         movie.setMovieRental(movieResource.getMovieRental());
